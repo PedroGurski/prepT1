@@ -22,7 +22,7 @@ void lista_destroi(lista_t **l)
 {
     nodo_t *aux;
     
-    while ((*l)->ini != NULL)
+    while ((*l)->ini)
     {
         aux = (*l)->ini;
         (*l)->ini = aux->prox;
@@ -30,7 +30,8 @@ void lista_destroi(lista_t **l)
     }
 
     free (*l);
-    (*l) == NULL;
+    aux = NULL;
+    (*l) = NULL;
 }
 
 /*
@@ -102,10 +103,10 @@ int lista_remove_ordenado(lista_t *l, elemento_t *elemento)
     else
     {
         /* Se remover for 1 posicao */
-        if (l->ini->elemento->chave = elemento->chave)
+        if (l->ini->elemento->chave == elemento->chave)
         {
             aux = l->ini;
-            l->ini = NULL;
+            l->ini = aux->prox;
         }
         else
         {
@@ -118,7 +119,7 @@ int lista_remove_ordenado(lista_t *l, elemento_t *elemento)
             if (i->prox->elemento->chave == elemento->chave)
             {
                 aux = i->prox;
-                i = aux->prox;
+                i->prox = aux->prox;
             }
             else
                 return 0;
