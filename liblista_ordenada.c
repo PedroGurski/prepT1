@@ -20,19 +20,19 @@ lista_t *lista_cria()
  */
 void lista_destroi(lista_t **l)
 {
-    nodo_t *aux;
-    
-    while ((*l)->ini)
+    if (l != NULL && *l != NULL)
     {
-        aux = (*l)->ini;
-        (*l)->ini = aux->prox;
-        free (aux->elemento);
-        free (aux);
+        nodo_t *atual = (*l)->ini;
+        while (atual != NULL)
+        {
+            nodo_t *prox = atual->prox;
+            free(atual->elemento);
+            free(atual);
+            atual = prox;
+        }
+        free(*l);
+        *l = NULL;
     }
-
-    free (*l);
-    aux = NULL;
-    (*l) = NULL;
 }
 
 /*
