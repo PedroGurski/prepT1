@@ -26,6 +26,7 @@ void lista_destroi(lista_t **l)
     {
         aux = (*l)->ini;
         (*l)->ini = aux->prox;
+        free (aux->elemento);
         free (aux);
     }
 
@@ -95,7 +96,7 @@ int lista_insere_ordenado(lista_t *l, elemento_t *elemento)
 int lista_remove_ordenado(lista_t *l, elemento_t *elemento)
 {
     nodo_t *aux;
-    nodo_t *i;
+    nodo_t *atual;
 
     /* Se lista vazia */
     if (l->ini == NULL)
@@ -110,16 +111,18 @@ int lista_remove_ordenado(lista_t *l, elemento_t *elemento)
         }
         else
         {
-            i = l->ini;
+            atual = l->ini;
 
-            while (elemento->chave > i->prox->elemento->chave)
-                i = i->prox;
+            while (atual->prox != NULL && elemento->chave > atual->prox->elemento->chave)
+                atual = atual->prox;
 
+            if (atual->prox == NULL && elemento->chave > atual->elemento->chave)
+                return 0;
             /* Verifica se o elemento existe na lista */
-            if (i->prox->elemento->chave == elemento->chave)
+            else if (atual->prox->elemento->chave == elemento->chave)
             {
-                aux = i->prox;
-                i->prox = aux->prox;
+                aux = atual->prox;
+                atual->prox = aux->prox;
             }
             else
                 return 0;

@@ -1,3 +1,5 @@
+/* Criado por Pedro Gurski 
+    *Dia: 30/05/2023 */
 #include <stdio.h>
 #include <stdlib.h>
 #include "liblista_ordenada.h"
@@ -46,7 +48,6 @@ int main() {
                 break;
             case 0:
                 printf("Encerrando o programa.\n");
-                lista_destroi (&lista);
                 break;
             default:
                 printf("Opção inválida!\n");
